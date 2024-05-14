@@ -1,0 +1,32 @@
+#include <stdlib.h>
+#include <pthread.h>
+#include <windows.h>
+#define MAX 10
+void *funcion1()
+{
+
+    for(int veces = 0; veces <= 10000; veces++){ //crea los hilos
+    printf("Hola Threads!. Soy el thread [%d] ejecutando por [%i] vez\n", pthread_self(), veces);
+    }
+    pthread_exit(0);
+}
+int main()
+{
+pthread_t hilos[MAX]; //arreglo de hilos
+
+for(int i = 0; i < MAX; i++){ //crea los hilos
+    pthread_create(&hilos[i], NULL, funcion1, NULL);
+}
+for(int i = 0; i <MAX ; i++){ //funcion para que se ejecuten todos los hilos
+        pthread_join(hilos[i],NULL);
+}
+
+/*
+printf("Start sleep\n");
+Sleep(10000);
+printf("End sleep\n");
+*/
+
+
+return 0;
+}
